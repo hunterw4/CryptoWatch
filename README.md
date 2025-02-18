@@ -5,10 +5,6 @@ A school project for tracking cryptocurrency prices and trends.
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -22,12 +18,4 @@ CryptoWatch is a web application designed to help users track and analyze crypto
 - **User Authentication**: Secure login for personalized data tracking.
 - **Planned Responsive Design**: Works well on both desktop and mobile devices.
 
-## Installation
-
-To run CryptoWatch locally, follow these steps:
-
-1. **Clone the repository:**
-
-   ```sh
-   git clone https://github.com/hunterw4/CryptoWatch.git
-   cd CryptoWatch
+Will be adding on to this README when more is available and project is finished.
