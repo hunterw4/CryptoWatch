@@ -1,0 +1,83 @@
+
+body {
+    background-image: url("/static/images/bg.jpeg");
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    height: 100vh; 
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 80px;
+
+}
+
+.user-container {
+    display: flex;
+    justify-content: center;
+    background-color: #000000;
+    color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 80px;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+    
+}
+
+em {
+    color: grey;
+}
+
+#signupimg {
+    border: 2px solid black;
+    border-radius: 5px;
+    /* Box shadow generator https://www.cssmatic.com/box-shadow */
+    -webkit-box-shadow: 13px 14px 49px 33px rgba(53,43,107,0.92);
+    -moz-box-shadow: 13px 14px 49px 33px rgba(53,43,107,0.92);
+    box-shadow: 13px 14px 49px 33px rgba(53,43,107,0.92);
+}
+
+.box {
+    height: 250px;
+    width: 450px;
+    border: 2px solid red;
+    background-color: black;
+    color: white;
+}
+
+.custom-table, .custom-table th, .custom-table td {
+    background-color: black !important;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.button {
+    width: 125px;
+    text-align: center;
+    color: #4ffffc;
+    border: 2px solid #4ffffc;
+    border-radius: 20px;
+    /* Gradient tool to create this https://mycolor.space/gradient */
+    background-image: radial-gradient(circle, #4600fd, #5f00e1, #6b00c6, #6f00ad, #6e0096, #6f008f, #700088, #700081, #760086, #7c008c, #830091, #890096);  }
