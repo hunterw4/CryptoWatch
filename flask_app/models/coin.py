@@ -1,4 +1,4 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import connect_to_mysql
 
 class Coin:
     db = "cryptowatch"
