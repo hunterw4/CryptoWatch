@@ -81,3 +81,7 @@ em {
     border-radius: 20px;
     /* Gradient tool to create this https://mycolor.space/gradient */
     background-image: radial-gradient(circle, #4600fd, #5f00e1, #6b00c6, #6f00ad, #6e0096, #6f008f, #700088, #700081, #760086, #7c008c, #830091, #890096);  }
+
+#name-error, #email-error, #password-error {
+    color: red;
+}

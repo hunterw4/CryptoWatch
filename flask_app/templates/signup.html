@@ -42,17 +42,24 @@
                 <h1 class="text-center">Create an account</h1>
                 <em>Already have an account? <a href="/login">Login</a></em>
                 <br>
-                <label for="fname">Name</label>
-                <input type="text" class="form-control" id="fname" name="user_name">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <span id="name-error"></span>
+
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                <label for="fname">Password</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <span id="email-error"></span>
+
+                <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password">
-                <label for="fname">Re-enter password</label>
+                <span id="password-error"></span>
+
+                <label for="confirm_password">Re-enter password</label>
                 <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                <button type="submit" onclick="getform()" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>            
         </form>
-      </div>
+    </div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

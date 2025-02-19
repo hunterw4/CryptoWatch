@@ -24,10 +24,14 @@
                     <img src="{{ url_for('static', filename='images/cryptowatch.png') }}" height="80px">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link button" href="/signup">Sign Up!</a>
+                    {% if logged_in %}
+                        <a class="nav-link button" href="/logout">Logout</a>
+                    {% elif not logged_in %}
+                        <a class="nav-link" href="/login">Login</a>
+                        <li class="nav-item">
+                            <a class="nav-link button" href="/signup">Sign Up!</a>
+                        </li>
+                    {% endif %}
                 </li>
             </ul>
         </div>

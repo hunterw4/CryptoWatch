@@ -36,18 +36,24 @@
 <body>
     <div class="user-container">
         <img src="{{ url_for('static', filename='images/cryptobg.png') }}" id="signupimg" alt="">
-        <form id="myform" method="POST">
+        <form id="loginForm">
             <div class="form-group">
             <h1 class="text-center">Login</h1>
             <em>Dont have an account? <a href="/signup">Sign up</a></em>
             <br>
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-            <label for="fname">Password</label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <span id="email-error"></span>
+
+            <label for="name">Password</label>
             <input type="password" class="form-control" id="password" name="password">
-            <button type="submit" onclick="getform()" class="btn btn-primary">Submit</button>
+            <span id="password-error"></span>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
             </div>            
         </form>
       </div>
 </body>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </html>

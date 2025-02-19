@@ -1,26 +1,25 @@
-# a cursor is the object we use to interact with the database
 import pymysql.cursors
-# this class will give us an instance of a connection to our database
+
 class MySQLConnection:
     def __init__(self, db):
-        # change the user and password as needed
-        connection = pymysql.connect(host = 'localhost',
-                                    user = 'root',
-                                     #Need to create into OS var
-                                    password = 'password',
-                                    db = db,
-                                    charset = 'utf8mb4',
-                                    cursorclass = pymysql.cursors.DictCursor,
-                                    autocommit = True)
-        # establish the connection to the database
+        connection = pymysql.connect(host='localhost',
+                                     user='root',
+                                     password='yourpassword',
+                                     db=db,
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor,
+                                     autocommit=False)
         self.connection = connection
-    # the method to query the database
-    def query_db(self, query, data=None):
+
+    def query_db(self, query: str, data: dict = None):
         with self.connection.cursor() as cursor:
             try:
+                cursor.execute("SET SQL_SAFE_UPDATES = 0")
                 query = cursor.mogrify(query, data)
                 print("Running Query:", query)
-                executable = cursor.execute(query, data)
+                cursor.execute(query)
+
+
                 if query.lower().find("insert") >= 0:
                     # INSERT queries will return the ID NUMBER of the row inserted
                     self.connection.commit()
@@ -38,7 +37,12 @@ class MySQLConnection:
                 return False
             finally:
                 # close the connection
-                self.connection.close() 
-# connectToMySQL receives the database we're using and uses it to create an instance of MySQLConnection
-def connectToMySQL(db):
+                self.connection.close()
+            # connect_to_mysql receives the database we're using and uses it to create an instance of MySQLConnection
+
+
+
+
+def connect_to_mysql(db):
     return MySQLConnection(db)
+
