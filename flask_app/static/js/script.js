@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Function to validate user input when registering
+
 function validateForm() {
     var formData = {
         name: document.getElementById('name').value,
@@ -54,6 +56,8 @@ function validateForm() {
     .catch(error => console.error('Validation Error:', error));
 }
 
+
+// Function to pass JSON data to the /create route to actually go through with creating a new user after validation
 function createUser(formData) {
     fetch('/create', {
         method: 'POST',
@@ -82,6 +86,8 @@ function createUser(formData) {
     });
 }
 
+// Validating login information is valid
+
 function validateLogin() {
     var formData = {
         email: document.getElementById('email').value,
@@ -98,9 +104,9 @@ function validateLogin() {
     })
     .then(response => {
         if (!response.ok) {
-            // Parse the JSON even if it's not OK, so we can display server errors
+            // Parse the JSON even if it's not OK
             return response.json().then(err => {
-                throw err; // Now 'err' will contain the JSON errors if any
+                throw err; 
             });
         }
         return response.json();
@@ -123,7 +129,7 @@ function validateLogin() {
     .catch(error => {
         console.error('Login Error:', error);
         
-        // If the error is from our server (like validation errors), we can display them
+        // Will display server errrors
         if (error.errors) {
             Object.keys(error.errors).forEach(key => {
                 var errorElement = document.getElementById(key + '-error');
@@ -132,7 +138,7 @@ function validateLogin() {
                 }
             });
         } else {
-            // For other types of errors (network, etc.), show a generic message
+            // For other types of errors 
             var generalErrorElement = document.getElementById('general-error');
             if (!generalErrorElement) {
                 generalErrorElement = document.createElement('span');

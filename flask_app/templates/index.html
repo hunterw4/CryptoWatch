@@ -40,10 +40,18 @@
 <body>
     <div class="container">
         <div class="box">
-            <p>Trending here</p>
+            <h3 class="t-head">Global Crypto Market</h3>
+            <div class="g-content" id="globalContent">
+                <svg fill="#0aff0e" height="80" width="80" version="1.1" id="XMLID_260_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="#0aff0e"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="line-chart"> <g> <path d="M24,22H0v-2h24V22z M1.4,16L0,14.6l8-8l5,5L20.6,4H16V2h8v8h-2V5.4l-9,9l-5-5L1.4,16z"></path> </g> </g> </g></svg>
+            </div>
         </div>
+
         <div class="box">
-            <p>Global here</p>
+            <h3 class="t-head">Trending Coins:</h3>
+            <div class="trending" id="trendingData">
+            
+            </div>
+        
         </div>
     </div>
     <div class="container">
@@ -51,31 +59,27 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Name</th>
                 <th scope="col">Symbol</th>
                 <th scope="col">Price</th>
                 <th scope="col">24hr</th>
                 <th scope="col">Market Cap</th>
                 <th scope="col">Logo</th>
-                <!--If logged in-->
-                <th scope="col">Add to list</th>
+                {% if logged_in %}
+                    <th scope="col">Add to list</th>
+                {% endif %}
                 
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <!--If logged in-->
-                <td><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
-                    <g fill="#be00ff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM21,16h-5v5c0,0.553 -0.448,1 -1,1c-0.552,0 -1,-0.447 -1,-1v-5h-5c-0.552,0 -1,-0.447 -1,-1c0,-0.553 0.448,-1 1,-1h5v-5c0,-0.553 0.448,-1 1,-1c0.552,0 1,0.447 1,1v5h5c0.552,0 1,0.447 1,1c0,0.553 -0.448,1 -1,1z"></path></g></g>
-                    </svg></td>
-            </tr>
+            <script>
+                const loggedIn = {{ logged_in | tojson }};
+            </script>
+            <!-- Section for the list of coins to be displayed -->
+            <tbody id="coinTableBody">
+
             </tbody>
         </table>
       </div>
 </body>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </html>

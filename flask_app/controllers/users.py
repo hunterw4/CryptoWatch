@@ -9,10 +9,8 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def home():
-    if session.get('logged_in', ''):
-        return render_template('index.html', logged_in=True)
-    else:
-        return render_template('index.html')
+    logged_in = session.get('logged_in', False)
+    return render_template('index.html', logged_in=logged_in)
 
 
 @app.route('/watchlist')

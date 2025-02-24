@@ -12,12 +12,12 @@ class Coin:
     @classmethod
     def save(cls,data):
         query  = "INSERT INTO coins (name, symbol) VALUES (%(name)s,%(symbol)s);"
-        return connectToMySQL(cls.db).query_db(query,data)
+        return connect_to_mysql(cls.db).query_db(query,data)
 
     @classmethod
     def get_all_json(cls):
         query = "SELECT * FROM coins;"
-        results = connectToMySQL(cls.db).query_db(query)
+        results = connect_to_mysql(cls.db).query_db(query)
         users = []
         for user_data in results:
             users.append( user_data )

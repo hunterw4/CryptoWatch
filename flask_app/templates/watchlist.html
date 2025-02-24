@@ -24,11 +24,14 @@
                     <img src="{{ url_for('static', filename='images/cryptowatch.png') }}" height="80px">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <!-- Add another item if needed to balance the layout -->
-                    <a class="nav-link button" href="/signup">Sign Up!</a>
+                    {% if logged_in %}
+                        <a class="nav-link button" href="/logout">Logout</a>
+                    {% elif not logged_in %}
+                        <a class="nav-link" href="/login">Login</a>
+                        <li class="nav-item">
+                            <a class="nav-link button" href="/signup">Sign Up!</a>
+                        </li>
+                    {% endif %}
                 </li>
             </ul>
         </div>
@@ -37,10 +40,18 @@
 <body>
     <div class="container">
         <div class="box">
-            <p>Trending here</p>
+            <h3 class="t-head">Global Crypto Market</h3>
+            <div class="g-content" id="globalContent">
+                <svg fill="#0aff0e" height="80" width="80" version="1.1" id="XMLID_260_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="#0aff0e"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="line-chart"> <g> <path d="M24,22H0v-2h24V22z M1.4,16L0,14.6l8-8l5,5L20.6,4H16V2h8v8h-2V5.4l-9,9l-5-5L1.4,16z"></path> </g> </g> </g></svg>
+            </div>
         </div>
+
         <div class="box">
-            <p>Global here</p>
+            <h3 class="t-head">Trending Coins:</h3>
+            <div class="trending" id="trendingData">
+            
+            </div>
+        
         </div>
     </div>
     <div class="container">
@@ -78,5 +89,6 @@
             </tbody>
         </table>
       </div>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </body>
 </html>
