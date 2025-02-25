@@ -107,3 +107,14 @@ em {
     flex-direction: column;
     align-items: center;
 }
+
+.a-watch {
+    text-decoration: none; /* Removes underline */
+    color: inherit;       /* Inherits parent color instead of default blue */
+    border: none;         /* Removes any border */
+    outline: none;        /* Removes focus outline */
+    background: none;     /* Removes any background */
+    padding: 0;           /* Removes default padding */
+    margin: 0;            /* Removes default margin */
+    display: inline; 
+}

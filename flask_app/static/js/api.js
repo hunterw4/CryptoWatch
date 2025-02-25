@@ -64,7 +64,7 @@ function updateData() {
                 ${priceChangeHtml}
                 <td>${fmcap}</td>
                 <td><img src="${coin.image}" alt="${coin.name}" width="30" id="coinImg"></td>
-                ${alertIcon}
+                <td><a class="a-watch" href="/watchlist/add/${coin.id}"${alertIcon}</a></td>
             `;
             document.getElementById('coinTableBody').appendChild(row);
         });
@@ -122,7 +122,7 @@ function trendingCoin() {
 
             trendingRow.innerHTML = `
             <td><img src="${coin.thumb}" alt="${coin.name}" width="40" id="coinImg"></td>
-            <td><b>${coin.name}</b>,</td>
+            <td><b>${coin.name}</b> - </td>
             <td>$${coin.data.price.toFixed(2)}</td>
         `;
         document.getElementById('trendingData').appendChild(trendingRow);
@@ -131,7 +131,71 @@ function trendingCoin() {
     })
 }
 
+
+function watchlistData() {
+    fetch('/watchlist/get')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('watchTableBody').innerHTML = '';
+
+        data.forEach((coin, index) => {
+            const watchRow = document.createElement('tr');
+            const mcap = coin.market_cap;
+            const number = Number(mcap); 
+            let fmcap = '';
+            
+            // Format based on the actual number value
+            if (number >= 1000000000000) { // 1 trillion or more
+                fmcap = (number / 1000000000000).toFixed(1) + 'T'; // Trillion
+            } else if (number >= 1000000000) { // Billions
+                fmcap = (number / 1000000000).toFixed(3) + 'B'; // No fixed decimal, just toString()
+            } else if (number >= 1000000) { // Millions
+                fmcap = (number / 1000000).toFixed(3) + 'M'; 
+            }
+
+            // Price change logic
+            let priceChange = coin.price_change_percentage_24h;
+            let changeSymbol = priceChange >= 0 ? '' : '';
+            let color = priceChange >= 0 ? '#00fa11' : '#fa0000'; // Green for up, red for down
+            let svgPath = priceChange >= 0 ? 
+                '<path id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394 l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393 C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"></path>' :
+                '<path id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394 l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393 C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z" transform="rotate(180 165 165)"></path>';
+
+            let priceChangeHtml = `<td>
+                <svg fill="${color}" height="15" width="15" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve" stroke="${color}">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        ${svgPath}
+                    </g>
+                </svg> ${changeSymbol}${Math.abs(priceChange).toFixed(1)}%
+            </td>`;
+
+            // Alert icon logic
+            watchIcon = `
+                <td>
+                    <svg fill="#be00ff" height="30" width="30" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310.285 310.285" xml:space="preserve" stroke="#be00ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M155.143,0.001C69.597,0.001,0,69.597,0,155.143c0,85.545,69.597,155.142,155.143,155.142s155.143-69.597,155.143-155.142 C310.285,69.597,240.689,0.001,155.143,0.001z M244.143,171.498c0,4.411-3.589,8-8,8h-163c-4.411,0-8-3.589-8-8v-32 c0-4.411,3.589-8,8-8h163c4.411,0,8,3.589,8,8V171.498z"></path> </g></svg>
+                </td>`;
+         
+        
+            watchRow.innerHTML = `
+                <th scope="row">${index + 1}</th>
+                <td>${coin.name}</td>
+                <td>${coin.symbol.toUpperCase()}</td>
+                <td>$${coin.current_price}</td>
+                ${priceChangeHtml}
+                <td>${fmcap}</td>
+                <td><img src="${coin.image}" alt="${coin.name}" width="30" id="coinImg"></td>
+                <td><a class="a-watch" href="/watchlist/remove/${coin.id}"${watchIcon}</a></td>
+            `;
+            document.getElementById('watchTableBody').appendChild(watchRow);
+        });
+    })
+    .catch(err => console.error('Error fetching data:', err));
+}
+
 updateData();
 globalData();
 trendingCoin();
+watchlistData();
 setInterval(updateData, 3 * 60 * 1000); // Every 3 minutes

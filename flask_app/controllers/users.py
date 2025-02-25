@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template, redirect, request, jsonify, session, url_for
+from flask import render_template, redirect, request, jsonify, session, url_for, flash
 from flask_app.models import user
 from flask_bcrypt import Bcrypt
 
@@ -15,7 +15,10 @@ def home():
 
 @app.route('/watchlist')
 def watchlist():
-    return render_template('watchlist.html')
+    if not session.get('logged_in'):
+        flash('Must be registered or logged in to view watchlist.')
+        return redirect('/')
+    return render_template('watchlist.html', logged_in=session['logged_in'])
 
 @app.route('/validate-signup', methods=['POST'])
 def validate_signup():
@@ -98,6 +101,7 @@ def validate_login():
     if errors:
         print(errors)
         return jsonify({'errors': errors}), 400
+
 
 
 @app.route('/logout')
