@@ -1,5 +1,3 @@
-from tensorflow.tools.compatibility.ast_edits import APIAnalysisSpec
-
 from flask_app import app
 from flask import render_template, redirect, jsonify, session
 from flask_app.models import coin
@@ -16,7 +14,7 @@ def update_crypto_data():
     url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
     headers = {
         "accept": "application/json",
-        "x-cg-demo-api-key": f"{API_KEY}\t"
+        "x-cg-demo-api-key": API_KEY
     }
     response = requests.get(url, headers=headers)
     cached_data = response.json()
@@ -24,6 +22,7 @@ def update_crypto_data():
 # Schedule the update function
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=update_crypto_data, trigger="interval", minutes=3)
+
 scheduler.start()
 
 @app.route('/api/top-100')
@@ -83,10 +82,12 @@ def add_coin(id):
 @app.route('/watchlist/get')
 def get_user_watchlist():
     user_coins = coin.Coin.get_user_coins(session.get('user_id'))
+    if not user_coins:
+        return jsonify([])
     result = ''
     for coins in user_coins:
         if result:
-            result += "%2C"
+            result += ","
         result += coins['name']
     print(result)
     url = f"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids={result}&order=market_cap_desc"
@@ -108,3 +109,18 @@ def remove_coin(id):
     }
     coin.Coin.delete(data)
     return redirect('/watchlist')
+
+@app.route('/alert/enable/<id>')
+def test(id):
+    url = f"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids={id}"
+
+    headers = {
+        "accept": "application/json",
+        "x-cg-demo-api-key": API_KEY
+    }
+
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    coin_img = data[0]['image']
+    return render_template('alerts.html', coin_img = coin_img)
+

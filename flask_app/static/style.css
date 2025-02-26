@@ -32,6 +32,39 @@ body {
     justify-content: space-around;
 }
 
+
+.alert-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 400px;
+    justify-content: center;
+    padding: 60px;
+    background-image: linear-gradient(to right, #890096, #78006e, #62014d, #480931, #2d0c1c, #280a19, #240816, #200413, #2d0520, #390130, #420045, #46005d);    border-radius: 4px;
+    border: 2px solid black;
+    margin: 0 auto;
+}
+
+.i {
+    height: 180px;
+    width: 180px;
+    border: 5px solid black;
+    border-radius: 50%;
+}
+
+#alerth1 {
+    color: white;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+#alertid {
+    color: white;
+}
+
 a {
     text-decoration: none;
     
@@ -109,12 +142,34 @@ em {
 }
 
 .a-watch {
-    text-decoration: none; /* Removes underline */
-    color: inherit;       /* Inherits parent color instead of default blue */
-    border: none;         /* Removes any border */
-    outline: none;        /* Removes focus outline */
-    background: none;     /* Removes any background */
-    padding: 0;           /* Removes default padding */
-    margin: 0;            /* Removes default margin */
+    text-decoration: none; 
+    color: rgb(184, 0, 184);      
+    border: none;         
+    outline: none;        
+    background: none;     
+    padding: 0;           
+    margin: 0;           
     display: inline; 
+}
+
+.blur {
+    filter: blur(4px);
+    position: absolute;
+}
+
+/* Source for flash effect https://www.adamkhoury.com/CSS/video/Flash-and-Pulse-Effects-keyframes-Animation-Tutorial. 
+Made my own modifications */
+.flashit{
+	-webkit-animation: flash 2s ease-out;
+	animation: flash 2s ease-out;
+}
+@-webkit-keyframes flash {
+	0% { opacity: 1; } 
+	50% { opacity: .1; } 
+	100% { opacity: 1; }
+}
+@keyframes flash {
+	0% { opacity: 1; } 
+	50% { opacity: .1; } 
+	100% { opacity: 1; }
 }

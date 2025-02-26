@@ -60,7 +60,7 @@ function updateData() {
                 <th scope="row">${index + 1}</th>
                 <td>${coin.name}</td>
                 <td>${coin.symbol.toUpperCase()}</td>
-                <td>$${coin.current_price}</td>
+                <td class="flashit">$${coin.current_price}</td>
                 ${priceChangeHtml}
                 <td>${fmcap}</td>
                 <td><img src="${coin.image}" alt="${coin.name}" width="30" id="coinImg"></td>
@@ -182,11 +182,12 @@ function watchlistData() {
                 <th scope="row">${index + 1}</th>
                 <td>${coin.name}</td>
                 <td>${coin.symbol.toUpperCase()}</td>
-                <td>$${coin.current_price}</td>
+                <td class="flashit">$${coin.current_price}</td>
                 ${priceChangeHtml}
                 <td>${fmcap}</td>
                 <td><img src="${coin.image}" alt="${coin.name}" width="30" id="coinImg"></td>
                 <td><a class="a-watch" href="/watchlist/remove/${coin.id}"${watchIcon}</a></td>
+                <td><a class="a-watch" href="/alert/enable/${coin.id}"</a>Enable</td>
             `;
             document.getElementById('watchTableBody').appendChild(watchRow);
         });

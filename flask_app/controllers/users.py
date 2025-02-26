@@ -6,7 +6,6 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 
-
 @app.route('/')
 def home():
     logged_in = session.get('logged_in', False)
